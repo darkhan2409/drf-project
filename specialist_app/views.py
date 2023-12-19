@@ -12,5 +12,11 @@ class SpecialistsApiView(APIView):
 
     def get(self, request):
         specialists = Specialist.objects.all()
+        if 'order_by' in request.GET.keys():
+            ordering = request.GET.get('order_by')
+            specialists = specialists.order_by(ordering)
+        if 'search' in request.GET.keys():
+            search = request.GET.get('search')
+            specialists = specialists.filter(speciality__contains=search)
         data = SpecialistAllSerializer(specialists, many=True).data
         return Response(data, status=status.HTTP_200_OK)
