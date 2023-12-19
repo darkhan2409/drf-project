@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'specialist_app',
     'review_app',
     'record_app',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
